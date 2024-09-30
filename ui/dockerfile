@@ -1,0 +1,9 @@
+FROM nginx as build
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o install.sh && sh install.sh && apt-get install -y nodejs
+COPY . /build
+WORKDIR /build
+RUN npm install && npm run build
+FROM nginx as stage
+
+COPY --from=build /build/nginx/etc /etc/nginx
+COPY --from=build /build/build /app
