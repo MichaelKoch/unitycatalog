@@ -1,0 +1,29 @@
+
+FROM nginx as node 
+    RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o install.sh && sh install.sh && apt-get install -y nodejs
+FROM node as build
+
+    COPY . /build
+    WORKDIR /build
+    RUN npm install && npm run build
+
+FROM nginx as stage
+     ENV API_DOWNSTREAM_URL=http://localhost:8080    
+     ENV REACT_APP_GOOGLE_AUTH_ENABLED=false
+     ENV REACT_APP_OKTA_AUTH_ENABLED=false
+     ENV REACT_APP_KEYCLOAK_AUTH_ENABLED=false
+
+
+   
+   
+     
+     # Okta config
+     
+     
+     # Keycloak config
+    
+     
+     COPY ./nginx/templates /etc/nginx/templates
+     COPY ./nginx/wwwroot   /app
+     COPY --from=build /build/build /app
+     
