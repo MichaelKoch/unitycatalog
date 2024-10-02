@@ -1,0 +1,4 @@
+nginx
+echo "PROXY STARTED"
+cd /opt/unitycatalog
+java -cp "jars/classes:jars/*" io.unitycatalog.server.UnityCatalogServer

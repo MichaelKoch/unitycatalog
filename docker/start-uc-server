@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-ROOT_DIR="$(dirname "$SCRIPT_DIR")"
-SERVER_CLASS_NAME="io.unitycatalog.server.UnityCatalogServer"
-SERVER_JAVA_COMMAND="java -cp "jars/classes:jars/*" ${SERVER_CLASS_NAME} $@"
-cd ${ROOT_DIR}
-exec ${SERVER_JAVA_COMMAND}
